@@ -2,11 +2,149 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Trang web của tôi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실험용 전자상거래 쇼핑몰</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 기본 스타일 초기화 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; color: #333; background-color: #f9f9f9; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 헤더 (Header) --- */
+        header { background: #fff; border-bottom: 1px solid #eee; padding: 15px 5%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: bold; color: #222; }
+        .search-bar { flex: 0 1 40%; display: flex; border: 1px solid #ddd; border-radius: 20px; overflow: hidden; }
+        .search-bar input { flex: 1; padding: 10px 15px; border: none; outline: none; }
+        .search-bar button { background: #555; color: #fff; border: none; padding: 0 20px; cursor: pointer; }
+        .header-icons { display: flex; gap: 20px; font-size: 20px; color: #555; }
+        .header-icons i { cursor: pointer; position: relative; }
+        .cart-count { position: absolute; top: -8px; right: -10px; background: #ff4d4f; color: #fff; font-size: 11px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* --- 네비게이션 바 (Nav) --- */
+        nav { background: #fff; border-bottom: 1px solid #eee; padding: 10px 5%; }
+        nav ul { display: flex; justify-content: center; gap: 40px; }
+        nav ul li a { font-size: 16px; font-weight: 500; color: #444; padding: 5px 0; transition: color 0.3s; }
+        nav ul li a:hover { color: #007bff; border-bottom: 2px solid #007bff; }
+
+        /* --- 메인 배너 (Hero Section) --- */
+        .hero-banner { background-color: #e2eafc; color: #333; height: 400px; display: flex; align-items: center; padding: 0 10%; margin-bottom: 40px; }
+        .hero-content h2 { font-size: 48px; margin-bottom: 15px; }
+        .hero-content p { font-size: 18px; margin-bottom: 25px; opacity: 0.8; }
+        .btn-shop { background: #222; color: #fff; padding: 12px 30px; border-radius: 5px; font-weight: bold; transition: background 0.3s; }
+        .btn-shop:hover { background: #444; }
+
+        /* --- 메인 컨텐츠 영역 --- */
+        main { max-width: 1200px; margin: 0 auto; padding: 0 20px; margin-bottom: 80px; }
+        h3.section-title { font-size: 24px; margin-bottom: 20px; border-left: 4px solid #333; padding-left: 10px; }
+
+        /* --- 카테고리 퀵 메뉴 --- */
+        .category-quick { display: flex; justify-content: space-around; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 40px; }
+        .cat-item { text-align: center; cursor: pointer; }
+        .cat-icon { width: 60px; height: 60px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #555; margin-bottom: 10px; transition: background 0.3s; }
+        .cat-item:hover .cat-icon { background: #e0e0e0; color: #222; }
+
+        /* --- 상품 그리드 (Product Grid) --- */
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .product-item { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .product-item:hover { transform: translateY(-5px); }
+        .product-thumb { width: 100%; height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #ccc; }
+        .product-details { padding: 15px; }
+        .product-name { font-size: 15px; font-weight: 500; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .product-price { font-size: 18px; font-weight: bold; color: #222; margin-bottom: 15px; }
+        .product-price span { font-size: 14px; font-weight: normal; color: #888; text-decoration: line-through; margin-left: 5px; }
+        .btn-add-cart { width: 100%; background: #007bff; color: #fff; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .btn-add-cart:hover { background: #0056b3; }
+
+        /* --- 푸터 (Footer) --- */
+        footer { background: #333; color: #fff; padding: 40px 5%; text-align: center; font-size: 14px; }
+        footer p { opacity: 0.7; }
+    </style>
 </head>
 <body>
-    <h1>Xin chào! Tôi đang thử nghiệm website.</h1>
-    <p>Đây là trang web đầu tiên của tôi trên GitHub Pages.</p>
-    <button id="test-button">Mua ngay</button>
+
+    <header>
+        <div class="logo">실험용몰</div>
+        <div class="search-bar">
+            <input type="text" placeholder="검색어를 입력하세요...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-cart"><span class="cart-count">3</span></i>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">BEST</a></li>
+            <li><a href="#">의류</a></li>
+            <li><a href="#">잡화</a></li>
+            <li><a href="#">뷰티</a></li>
+            <li><a href="#">테크</a></li>
+            <li><a href="#">SALE</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-banner">
+        <div class="hero-content">
+            <h2>시즌 오프 세일</h2>
+            <p>최대 70% 할인된 가격으로 만나보세요.</p>
+            <a href="#" class="btn-shop">지금 구매하기</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="category-quick">
+            <div class="cat-item"><div class="cat-icon"><i class="fas fa-tshirt"></i></div><span>의류</span></div>
+            <div class="cat-item"><div class="cat-icon"><i class="fas fa-hat-cowboy"></i></div><span>모자</span></div>
+            <div class="cat-item"><div class="cat-icon"><i class="fas fa-shoe-prints"></i></div><span>신발</span></div>
+            <div class="cat-item"><div class="cat-icon"><i class="fas fa-laptop"></i></div><span>노트북</span></div>
+            <div class="cat-item"><div class="cat-icon"><i class="fas fa-headphones"></i></div><span>헤드폰</span></div>
+        </div>
+
+        <h3 class="section-title">이달의 추천 상품</h3>
+        <div class="product-grid">
+            <div class="product-item">
+                <div class="product-thumb"><i class="fas fa-image"></i></div>
+                <div class="product-details">
+                    <p class="product-name">베이직 면 티셔츠 (White)</p>
+                    <p class="product-price">15,000원 <span>20,000원</span></p>
+                    <button class="btn-add-cart">담기</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-thumb"><i class="fas fa-image"></i></div>
+                <div class="product-details">
+                    <p class="product-name">스타일리시 레더 백팩</p>
+                    <p class="product-price">89,000원</p>
+                    <button class="btn-add-cart">담기</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-thumb"><i class="fas fa-image"></i></div>
+                <div class="product-details">
+                    <p class="product-name">무선 노이즈 캔슬링 헤드폰</p>
+                    <p class="product-price">299,000원 <span>350,000원</span></p>
+                    <button class="btn-add-cart">담기</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-thumb"><i class="fas fa-image"></i></div>
+                <div class="product-details">
+                    <p class="product-name">경량 미니 노트북 13인치</p>
+                    <p class="product-price">1,250,000원</p>
+                    <button class="btn-add-cart">담기</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2023 실험용 쇼핑몰 Corp. All rights reserved.</p>
+        <p>실험 목적으로 제작된 페이지입니다.</p>
+    </footer>
+
 </body>
 </html>
